@@ -20,15 +20,35 @@ globalStyle('html', {
       MozTextSizeAdjust: 'none',
       WebkitTextSizeAdjust: 'none',
       textSizeAdjust: 'none',
-      fontSize: '62.5%',
+      fontSize: '16px',
+      width: '100%',
+      height: '100%',
+    },
+  },
+  '@media': {
+    '(max-width: 320px)': {
+      fontSize: '9px',
     },
   },
 })
 
+globalStyle('#app', {
+  height: '100%',
+})
+
+globalStyle('#page', {
+  height: '100%',
+})
+
+globalStyle('.content', {
+  display: 'flex',
+  flexDirection: 'column',
+  height: '100%',
+  padding: '0 2.4rem',
+})
+
 globalStyle('body, input, textarea, select, button, table', {
-  fontSize: '1.4rem',
   fontFamily: '"Spoqa Han Sans Neo", sans-serif',
-  lineHeight: 1.4,
   color: '#333',
 })
 
@@ -147,10 +167,4 @@ globalStyle(':focus', {
   outlineStyle: 'none',
 })
 
-globalStyle('html', {
-  '@media': {
-    '(max-width: 320px)': {
-      fontSize: '9px',
-    },
-  },
-})
+globalStyle('html', {})

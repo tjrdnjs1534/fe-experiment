@@ -1,0 +1,18 @@
+export const fontSize = {
+  size38: '2.375rem',
+  size36: '2.25rem',
+  size32: '2rem',
+  size30: '1.875rem',
+  size28: '1.75rem',
+  size26: '1.625rem',
+  size24: '1.5rem',
+  size22: '1.375rem',
+  size20: '1.25rem',
+  size18: '1.125rem',
+  size16: '1rem',
+  size14: '0.875rem',
+  size13: '0.8125rem',
+  size12: '0.75rem',
+  size11: '0.6875rem',
+  size10: '0.625rem',
+} as const

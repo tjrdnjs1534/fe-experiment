@@ -4,7 +4,7 @@ export type DeepNull<T> = {
 
 export const createNullObject = <T>(obj: T): DeepNull<T> => {
   return Object.fromEntries(
-    Object.entries(obj as Record<string, unknown>).map(([key, value]) => [
+    Object.entries(obj as Record<string | number, unknown>).map(([key, value]) => [
       key,
       typeof value === 'object' ? createNullObject(value) : null,
     ])

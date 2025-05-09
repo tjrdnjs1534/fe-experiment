@@ -1,7 +1,22 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "next-env.d.ts"],
+  "exclude": ["node_modules", "src/**/*.spec.ts", "src/**/*.test.ts"],
+  "compilerOptions": {
+    "baseUrl": "./", // 기준은 프로젝트 루트
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@styles/*": ["src/styles/*"]
+    },
+    "jsx": "preserve",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "incremental": true,
+    "types": ["node"]
+  }
 }

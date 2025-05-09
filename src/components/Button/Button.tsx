@@ -1,48 +1,120 @@
 import React from 'react'
-import { clsx } from 'clsx'
-import {
-  buttonBase,
-  buttonColorVariants,
-  buttonSizeVariants,
-  fullWidth as fullWidthStyle,
-} from './button.css'
+import { type ClassValue, clsx } from 'clsx'
+import { Box, BoxOwnProps } from '@components/private/Box'
+import { sizes } from '@styles/tokens/sizes'
 
-export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant: keyof typeof buttonColorVariants
-  size: keyof typeof buttonSizeVariants
-  loading?: boolean
+type ButtonElementType = 'a' | 'button'
+
+type AsElementProps<T extends ButtonElementType> = T extends 'a'
+  ? Partial<React.AnchorHTMLAttributes<HTMLAnchorElement>>
+  : T extends 'button'
+    ? Partial<React.ButtonHTMLAttributes<HTMLButtonElement>>
+    : never
+
+type ButtonProps<T extends ButtonElementType = 'button'> = {
+  as?: T
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'outlined' | 'white'
+  display?: 'block' | 'inline-block' | 'inline-flex'
+  size?: 'small' | 'medium' | 'large'
   fullWidth?: boolean
-}
+  loading?: boolean
+  className?: ClassValue
+  children?: React.ReactNode
+  disabled?: boolean
+} & AsElementProps<T>
 
 export function Button({
   variant = 'primary',
+  display = 'block',
   size = 'medium',
-  loading = false,
   fullWidth = false,
+  loading = false,
+  as = 'button',
+  className,
   disabled,
   children,
-  className,
-  ...props
+  onClick,
+  ...rest
 }: ButtonProps) {
   const isDisabled = disabled || loading
 
+  const getVariantProps = (): BoxOwnProps => {
+    switch (variant) {
+      case 'primary':
+        return {
+          backgroundColor: isDisabled ? 'bgSteelBlue' : 'blue300',
+          color: isDisabled ? 'steelBlue' : 'white',
+        }
+      case 'secondary':
+        return {
+          backgroundColor: 'dgray100',
+          color: isDisabled ? 'dgray300' : 'dgray500',
+        }
+      case 'tertiary':
+        return {
+          backgroundColor: isDisabled ? 'dgray500' : 'dgray800',
+          color: isDisabled ? 'gray060' : 'white',
+        }
+      case 'outlined':
+        return {
+          backgroundColor: 'white',
+          borderColor: isDisabled ? 'gray040' : 'gray050',
+          borderWidth: '1px',
+          borderStyle: 'solid',
+          color: isDisabled ? 'gray050' : 'black',
+        }
+      case 'white':
+        return {
+          backgroundColor: 'white',
+          color: isDisabled ? 'gray050' : 'black',
+        }
+      default:
+        return {}
+    }
+  }
+
+  const getSizeProps = (): BoxOwnProps => {
+    switch (size) {
+      case 'small':
+        return {
+          height: 38,
+          fontSize: 'size14',
+          borderRadius: 'm',
+        }
+      case 'medium':
+        return {
+          height: 48,
+          fontSize: 'size14',
+          borderRadius: 'l',
+        }
+      case 'large':
+        return {
+          height: 48,
+          fontSize: 'size16',
+          borderRadius: 'l',
+        }
+      default:
+        return {}
+    }
+  }
+
   return (
-    <button
-      className={clsx(
-        buttonBase,
-        buttonColorVariants[variant],
-        buttonSizeVariants[size],
-        fullWidth && fullWidthStyle,
-        className
-      )}
+    <Box
+      as={as}
+      type={as === 'button' ? 'button' : undefined}
+      display={display}
+      textAlign="center"
+      fontWeight="medium"
+      cursor={isDisabled ? 'not-allowed' : 'pointer'}
+      {...getVariantProps()}
+      {...getSizeProps()}
+      className={clsx(className)}
       disabled={isDisabled}
-      {...props}
+      aria-disabled={isDisabled}
+      onClick={onClick}
+      {...rest}
     >
-      {loading ? (
-        <span>Loading...</span> // 추후 스피너 컴포넌트 연결 가능
-      ) : (
-        <>{children}</>
-      )}
-    </button>
+      {loading ? <span>Loading...</span> : children}
+    </Box>
   )
 }

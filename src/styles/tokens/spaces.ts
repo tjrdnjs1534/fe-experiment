@@ -10,4 +10,5 @@ export const spacing = {
   xl: sizes[24],
   xxl: sizes[32],
   xxxl: sizes[40],
+  none: 0,
 } as const

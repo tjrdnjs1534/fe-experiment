@@ -1,5 +1,9 @@
 export const sizes = {
-  fullWidth: '100%',
+  auto: 'auto',
+  fitContent: 'fit-content',
+  maxContent: 'max-content',
+  minContent: 'min-content',
+  full: '100%',
   180: '11.25rem',
   80: '5rem',
   48: '3rem',

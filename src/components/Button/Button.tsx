@@ -1,7 +1,6 @@
 import React from 'react'
 import { type ClassValue, clsx } from 'clsx'
 import { Box, BoxOwnProps } from '@components/private/Box'
-import { sizes } from '@styles/tokens/sizes'
 
 type ButtonElementType = 'a' | 'button'
 
@@ -11,7 +10,7 @@ type AsElementProps<T extends ButtonElementType> = T extends 'a'
     ? Partial<React.ButtonHTMLAttributes<HTMLButtonElement>>
     : never
 
-type ButtonProps<T extends ButtonElementType = 'button'> = {
+export type ButtonProps<T extends ButtonElementType = 'button'> = {
   as?: T
   variant?: 'primary' | 'secondary' | 'tertiary' | 'outlined' | 'white'
   display?: 'block' | 'inline-block' | 'inline-flex'
@@ -21,7 +20,7 @@ type ButtonProps<T extends ButtonElementType = 'button'> = {
   className?: ClassValue
   children?: React.ReactNode
   disabled?: boolean
-} & AsElementProps<T>
+} & Omit<AsElementProps<T>, 'color'>
 
 export function Button({
   variant = 'primary',
@@ -80,23 +79,28 @@ export function Button({
           height: 38,
           fontSize: 'size14',
           borderRadius: 'm',
+          py: 's',
         }
       case 'medium':
         return {
           height: 48,
           fontSize: 'size14',
           borderRadius: 'l',
+          py: 'm',
         }
       case 'large':
         return {
           height: 48,
           fontSize: 'size16',
           borderRadius: 'l',
+          py: 'm',
         }
       default:
         return {}
     }
   }
+
+  const fullWidthProps: BoxOwnProps = fullWidth ? { width: 'full' } : {}
 
   return (
     <Box
@@ -106,6 +110,7 @@ export function Button({
       textAlign="center"
       fontWeight="medium"
       cursor={isDisabled ? 'not-allowed' : 'pointer'}
+      {...fullWidthProps}
       {...getVariantProps()}
       {...getSizeProps()}
       className={clsx(className)}

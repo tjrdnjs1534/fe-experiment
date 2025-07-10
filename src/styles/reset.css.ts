@@ -56,15 +56,19 @@ globalStyle(
   `
   body, div, p, span, h1, h2, h3, h4, h5, h6,
   ul, ol, li, dl, dt, dd,
-  table, th, td, form, fieldset, legend, button
-  input, textarea, button, select,
+  table, th, td, form, fieldset, legend,
+  input, textarea, button, select, p
   header, footer, main, article, section, aside
   `,
   {
-    margin: 0,
-    padding: 0,
-    border: 0,
-    boxSizing: 'border-box',
+    '@layer': {
+      [layers.reset]: {
+        margin: 0,
+        padding: 0,
+        border: 0,
+        boxSizing: 'border-box',
+      },
+    },
   }
 )
 

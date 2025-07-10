@@ -1,7 +1,7 @@
 import React, { ReactNode, AllHTMLAttributes, DOMAttributes, JSX, Ref } from 'react'
+import * as reset from '@styles/resetComponent.css'
 import clsx, { type ClassValue } from 'clsx'
 import { getStyleFromProps } from '@styles/utils/getStyleFromProps'
-import * as reset from '@styles/resetComponent.css'
 import { type Sprinkles } from '@styles/sprinkles.css'
 
 export type BoxOwnProps = Partial<Sprinkles> & {
@@ -12,13 +12,12 @@ export type BoxOwnProps = Partial<Sprinkles> & {
 }
 
 type PolymorphicComponentProps = BoxOwnProps &
-  Omit<AllHTMLAttributes<HTMLElement>, 'className' | 'style'> &
+  Omit<AllHTMLAttributes<HTMLElement>, keyof Sprinkles | 'className' | 'style'> &
   Omit<DOMAttributes<HTMLElement>, 'children' | 'dangerouslySetInnerHTML'>
 
 export const Box = ({ as, className, children, ref, ...props }: PolymorphicComponentProps) => {
   const Component = as || 'div'
   const { classNames, restProps } = getStyleFromProps(props)
-
   const mergedClassName = clsx(
     reset.base,
     reset.element[Component as keyof typeof reset.element],

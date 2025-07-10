@@ -26,6 +26,7 @@ type Story = StoryObj<typeof Button>
 
 export const Default: Story = {
   args: {
+    variant: 'primary',
     children: <p>버튼이름</p>,
   },
 }

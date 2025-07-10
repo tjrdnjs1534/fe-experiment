@@ -5,6 +5,7 @@ export const sizes = {
   minContent: 'min-content',
   full: '100%',
   180: '11.25rem',
+  84: '5.25rem',
   80: '5rem',
   48: '3rem',
   40: '2.5rem',
@@ -28,4 +29,5 @@ export const sizes = {
   6: '0.375rem',
   4: '0.25rem',
   2: '0.125rem',
+  0: '0',
 } as const

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fe-experiment
+  namespace: fe-experiment-vite
+  labels:
+    app: fe-experiment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fe-experiment
+  template:
+    metadata:
+      labels:
+        app: fe-experiment
+    spec:
+      containers:
+        - name: fe-experiment
+          image: ghcr.io/tjrdnjs1534/fe-experiment:image-${GITHUB_SHA}
+          ports:
+            - containerPort: 4173
+          resources:
+            limits:
+              memory: "768Mi"
+              cpu: "500m"
+            requests:
+              memory: "512Mi"
+              cpu: "250m"

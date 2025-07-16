@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fe-experiment-storybook
+  namespace: fe-experiment-vite
+  labels:
+    app: fe-experiment-storybook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fe-experiment-storybook
+  template:
+    metadata:
+      labels:
+        app: fe-experiment-storybook
+    spec:
+      containers:
+        - name: fe-experiment-storybook
+          image: ghcr.io/tjrdnjs1534/fe-experiment:storybook-${GITHUB_SHA}
+          ports:
+            - containerPort: 6006

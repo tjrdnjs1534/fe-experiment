@@ -1,0 +1,19 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: fe-experiment
+  namespace: fe-experiment-vite
+  labels:
+    app: fe-experiment
+spec:
+  host: fe-experiment-vite.okd1.shinhancard.rd
+  to:
+    kind: Service
+    name: fe-experiment
+    weight: 100
+  port:
+    targetPort: http
+  tls:
+    termination: edge # https 지원 원치 않으면 이 항목 제거
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

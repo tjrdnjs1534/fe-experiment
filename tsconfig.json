@@ -20,6 +20,7 @@
     "types": ["node"],
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "target": "ESNext",
   }
 }

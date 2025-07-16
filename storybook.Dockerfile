@@ -18,4 +18,4 @@ COPY --from=builder /app/storybook-static ./storybook-static
 
 EXPOSE 6006
 
-CMD ["serve", "-s", "storybook-static", "-l", "6006"]
+CMD ["serve", "storybook-static", "-l", "6006"]

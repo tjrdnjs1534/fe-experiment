@@ -19,6 +19,7 @@
     "incremental": true,
     "types": ["node"],
     "module": "ESNext",
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true
   }
 }
